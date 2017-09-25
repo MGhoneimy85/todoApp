@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+	<title>Crossover Todo App</title>
+	<base href="/" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css"  href="assets/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css"  href="assets/css/style.css">
+</head>
+<body>
+	<div class="container-fluid" ng-app="todoApp">
+		<h2 class="text-left modal-title">
+			<span class="hidden-xs hidden-sm"> Crossover</span>
+			<span>ToDo</span>
+			<div class="pull-right" ng-if="user">
+				<div class="pull-right">
+					<button class="btn btn-info" type="button" id="logoutBtn" ng-click="logout()" >Logout</button>
+				</div>
+				<div class="pull-right welcomeDiv">Welcome: {{ user.username }}</div>
+			</div>
+		</h2>
+		<div class="sepDiv"></div>
+		<div  ng-view></div>
+		<div class="sepDiv"></div>
+		<div class="text-center modal-footer">
+			<a href="https://www.linkedin.com/in/mghoneimy/" target="_blank" class="pull-right" >LinkedIn Profile</a>
+			<span class="pull-left">Mohamed El Ghoneimy </span>
+		</div>
+	</div>
+	<!-- plugins scripts files -->
+	<script src="assets/angular/angular/angular.js"></script>
+	<script src="assets/angular/angular-route/angular-route.js" type="text/javascript"></script>
+
+	<!-- app base scripts files -->
+	<script src="/app.module.js" type="text/javascript"></script>
+	<script src="/app.config.js" type="text/javascript"></script>
+	<script src="/app.constants.js" type="text/javascript"></script>
+
+
+	<!-- components scripts files -->
+
+
+	<!-- login component scripts files -->
+	<script src="components/Login/loginService.js"></script>
+	<script src="components/Login/loginController.js"></script>
+
+	<!-- todoListing component scripts files -->
+	<script src="components/todoList/todoListService.js"></script>
+	<script src="components/todoList/todoListController.js"></script>
+
+</body>
+</html>

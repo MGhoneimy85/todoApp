@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+    <link rel="stylesheet" type="text/css" href="jasmine-core/jasmine.css">
+    <noscript>No fun without JavaScript</noscript>
+    <script type="text/javascript" src="jasmine-core/jasmine.js"></script>
+    <script type="text/javascript" src="jasmine-core/jasmine-html.js"></script>
+    <script type="text/javascript" src="jasmine-core/boot.js"></script>
+    <script src="system.js"></script>
+    <script>var imports = ['node_modules/karma-chrome-launcher/examples/simple/index.spec.js','node_modules/karma-chrome-launcher/test/jsflags.spec.js','node_modules/karma-phantomjs-launcher/test/add.spec.js'];</script>
+    <script>
+        var DEBUG = true;
+        System.config({
+            'baseURL': './',
+            'defaultJSExtensions': true
+        });
+        var importPromises = [];
+        for (i = 0; i < imports.length; i++)
+            importPromises.push(System.import(imports[i]));
+
+        Promise.all(importPromises)
+                .then(function (modules) {
+                    console.log(modules);
+                    window.onload();
+                });
+    </script>
+</head>
+<body>
+</body>
+</html>

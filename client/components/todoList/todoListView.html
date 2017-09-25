@@ -1,0 +1,97 @@
+<div class="container-fluid" id="todoListCont" ng-controller="todoListController" ng-init="init()">
+    <div ng-show="errorMessage" class="alert alert-danger text-center">
+        {{errorMessage}}
+    </div>
+    <div ng-show="updateFormValidation" class="alert-danger alert text-center col-xl-12 col-lg-12">
+        Title or Description required
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 notCompleted"   >
+        <h3 class="col-xl-12 col-lg-12 inprogressDiv">
+            In Progress
+            <span class="glyphicon glyphicon-plus pull-right" ng-click="isAdd = !isAdd "></span>
+        </h3>
+        <!-- add Template Section start  -->
+        <div class="col-xl-12 col-lg-12" ng-show="isAdd">
+            <div class="todoListItemCont">
+                <div class="col-xl-12 col-lg-12 todoListItem">
+                    <div class="alert alert-danger text-center" ng-show="addFormNotValid">Title and Description required</div>
+                    <form name="addForm">
+                        <div><label for="todoTitleID">Title</label></div>
+                        <div class="todoTitle">
+                            <input type="text" id="todoTitleID" name="todoTitle" required class="form-control" ng-model="ADDItem.title" />
+                        </div>
+                        <div class="sepDiv"></div>
+                        <div><label for="todoDescID">Description</label></div>
+                        <div class="todoDesc">
+                            <textarea type="text" id="todoDescID" name="todoDesc" class="form-control" required  ng-model="ADDItem.description" ></textarea>
+                            <div class="sepDiv"></div>
+                            <button class="btn btn-default pull-right" type="button" ng-click="isAdd = !isAdd ">Cancel</button>
+                            <button class="btn btn-info pull-right" type="button" ng-click="addTodos(ADDItem)">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- add Template Section End  -->
+        <!-- inprogress Template Section start  -->
+        <div class="col-xl-12 col-lg-12 dragdropDiv" id="notCompleted" ondrop="angular.element(document.getElementById('todoListCont')).scope().drop(event,this)" ondragover="angular.element(document.getElementById('todoListCont')).scope().allowDrop(event)" >
+            <div class="todoListItemCont" ng-if="item.status=='notCompleted'"  ng-repeat="item in TodoListArray track by $index" id="{{item._id}}" draggable="true" ondragstart="angular.element(document.getElementById('todoListCont')).scope().drag(event,this,'completed')">
+                <div class="col-xl-12 col-lg-12 todoListItem" ng-show="activeID!=item._id" ng-dblclick="changeActiveID(item._id)">
+                    <div class="todoTitle"><strong> {{item.title}}</strong></div>
+                    <div class="todoDesc">{{item.description | htmlToPlaintext }}</div>
+                    <div class="todoTitle text-right"><strong>{{item.author.username}}</strong></div>
+                    <!--<span class="glyphicon glyphicon-edit pull-right"></span>-->
+                    <span class="glyphicon glyphicon-remove-circle pull-right" ng-show="currentUser.username == item.author.username" ng-click="deleteTodos(item._id)" ></span>
+                </div>
+                <div class="col-xl-12 col-lg-12 todoListItem" ng-show="activeID==item._id" ng-dblclick="changeActiveID(0);init()">
+                    <ng-form name="updateForm" >
+                        <div><label>Title</label></div>
+                        <div class="todoTitle"><input type="text" required class="form-control" ng-disabled="currentUser.username != item.author.username" ng-model="item.title" /> </div>
+                        <div class="sepDiv"></div>
+                        <div><label>Description</label></div>
+                        <div class="todoDesc">
+                            <textarea type="text" class="form-control" required ng-disabled="currentUser.username != item.author.username" ng-model="item.description" ></textarea>
+                            <div class="sepDiv"></div>
+                            <button class="btn btn-default pull-right" type="button" ng-click="changeActiveID(0);init()">Cancel</button>
+                            <button class="btn btn-info pull-right" ng-show="currentUser.username == item.author.username" type="button" ng-click="updateTodos(updateForm,item._id,item.title,item.description,item.status)">Update</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- inprogress Template Section end  -->
+    <!-- completed Template Section start  -->
+    <div class="col-xl-6 col-lg-6 col-md-6 Completed"  >
+        <h3 class="col-xl-12 col-lg-12 completeDiv">
+            Completed
+        </h3>
+        <div class="col-xl-12 col-lg-12 dragdropDiv" id="Completed"   ondrop="angular.element(document.getElementById('todoListCont')).scope().drop(event,this)" ondragover="angular.element(document.getElementById('todoListCont')).scope().allowDrop(event)">
+            <div class="todoListItemCont" ng-if="item.status=='completed'"   ng-repeat="item in TodoListArray track by $index" id="{{item._id}}" draggable="true" ondragstart="angular.element(document.getElementById('todoListCont')).scope().drag(event,this,'notCompleted')" >
+                <div class="col-xl-12 col-lg-12 todoListItem" ng-show="activeID!=item._id" ng-dblclick="changeActiveID(item._id)">
+                    <div class="todoTitle"><strong>{{item.title}}</strong></div>
+                    <div class="todoDesc">{{item.description | htmlToPlaintext }}</div>
+                    <div class="todoTitle text-right"><strong>{{item.author.username}}</strong></div>
+                    <!--<span class="glyphicon glyphicon-edit pull-right"></span>-->
+                    <span class="glyphicon glyphicon-remove-circle pull-right" ng-show="currentUser.username == item.author.username" ng-click="deleteTodos(item._id)" ></span>
+                </div>
+                <div class="col-xl-12 col-lg-12 todoListItem" ng-show="activeID==item._id" ng-dblclick="changeActiveID(0);init()">
+                    <ng-form name="updateForm" >
+                        <div><label>Title</label></div>
+                        <div class="todoTitle"><input type="text" required class="form-control" ng-disabled="currentUser.username != item.author.username" ng-model="item.title" /> </div>
+                        <div class="sepDiv"></div>
+                        <div><label>Description</label></div>
+                        <div class="todoDesc">
+                            <textarea type="text" required class="form-control" ng-disabled="currentUser.username != item.author.username" ng-model="item.description" ></textarea>
+                            <div class="sepDiv"></div>
+                            <button class="btn btn-default pull-right" type="button" ng-click="changeActiveID(0);init()">Cancel</button>
+                            <button class="btn btn-info pull-right" ng-show="currentUser.username == item.author.username" type="button" ng-click="updateTodos(updateForm,item._id,item.title,item.description,item.status)">Update</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- completed Template Section end  -->
+
+</div>

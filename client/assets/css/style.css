@@ -1,0 +1,156 @@
+body{
+    background:#fff url('../img/todoBG.jpg') repeat-y center top;  /*we can change todoBG1 and todoBG3 ui options */
+    background-size:100%;
+}
+
+
+/* generic styles and masterpage */
+
+.marginAuto{
+    margin: 0 auto;
+    float:none
+}
+
+h2.modal-title{
+    color: #5bc0de;
+    padding: 30px;
+    font:normal 36px Arial;
+    background: rgba(0,0,0,.75);
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+div.modal-footer{
+    color: #5bc0de;
+    padding: 10px;
+    font:normal 14px Arial;
+    background: rgba(0,0,0,.75);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+div.modal-footer a{
+    color: #5bc0de;
+    text-decoration: underline;
+}
+
+/*login form styles*/
+
+
+.loginDiv{
+    background: rgba(0,0,0,.75);
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.loginDiv label{
+    color:#5bc0de;
+    font:bold 18px/22px Arial;
+}
+
+.sepDiv{
+    clear: both;
+    margin: 20px 0 0 0;
+}
+
+
+
+/*todolist screeen styles*/
+
+
+.welcomeDiv{
+    color: #fff;
+    font:normal 18px/44px Arial;
+    margin: 0 10px 0 0;
+}
+
+
+.inprogressDiv{
+    background-color: #f0ad4e;
+    padding: 10px;
+    border-radius:5px;
+    color: #fff;
+}
+
+.completeDiv{
+    background-color:#5cb85c;
+    padding: 10px;
+    border-radius:5px;
+    color: #fff;
+}
+
+
+.todoListItem{
+    background-color: rgba(255,255,255,.8);
+    padding: 10px;
+    border-radius:5px;
+    width:100%;
+    display: inline-block;
+}
+
+
+.todoListItem .glyphicon.glyphicon-remove-circle{
+    font-size: 20px;
+    color: #ac2925;
+    position: absolute;
+    top:10px;
+    right:10px
+}
+
+.todoListItem .glyphicon.glyphicon-edit{
+    font-size: 20px;
+    position: absolute;
+    bottom:10px;
+    right:10px;
+    top: auto;
+}
+
+.todoListItemCont{
+    width:100%;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.todoListItem .todoTitle{
+    font-size: 22px;
+    padding-right: 20px;
+}
+
+.todoListItem .todoDesc{
+    font-size: 18px;
+    padding-right: 20px;
+}
+.todoListItem .todoDesc button{
+    margin: 0 4px;
+}
+
+
+
+.dragdropDiv{
+    min-height:300px;
+
+
+}
+
+.notCompleted .dragdropDiv{
+    border: 5px #f0ad4e solid;
+    border-radius: 10px;
+}
+
+.Completed .dragdropDiv{
+    border: 5px #5cb85c solid;
+    border-radius: 10px;
+}
+
+/*  Responsive Styles for small screens  */
+
+
+@media (max-width: 750px) {
+
+    .dragdropDiv{
+        min-height:100px;
+    }
+
+}
