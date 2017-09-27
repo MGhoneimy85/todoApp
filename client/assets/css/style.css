@@ -126,11 +126,24 @@ div.modal-footer a{
     margin: 0 4px;
 }
 
+/* code to adjust height of the 2 buckets height to be the same
+ so you can drag drop while there is many in progress and few complete and vis versa */
+
+#todoListCont .row.tabsContainer{
+    display: flex;
+}
+
+#todoListCont .row.tabsContainer div.notCompleted , #todoListCont .row.tabsContainer div.Completed{
+    flex:1;
+    padding-bottom: 75px;
+}
+/* code to adjust height of the 2 buckets height to be the same
+ so you can drag drop while there is many in progress and few complete and vis versa */
 
 
 .dragdropDiv{
     min-height:300px;
-
+    height: 100%;
 
 }
 
@@ -151,6 +164,14 @@ div.modal-footer a{
 
     .dragdropDiv{
         min-height:100px;
+    }
+    #todoListCont .row.tabsContainer{
+        display: block;
+    }
+
+    #todoListCont .row.tabsContainer div.notCompleted , #todoListCont .row.tabsContainer div.Completed{
+        flex:auto;
+        padding-bottom: 0;
     }
 
 }

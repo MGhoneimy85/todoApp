@@ -23,27 +23,6 @@ todoApp.controller('todoListController', function ($scope,$rootScope,$location,$
         else{
             $scope.errorMessage = "Not Authorized";
         }
-
-
-
-        // code to adjust height of the 2 buckets height to be the same
-        // so you can drag drop while there is many in progress and few complete and vis versa
-
-        setTimeout(function(){
-
-            var heightNotComp = document.getElementById("notCompleted").clientHeight;
-            var heightComp = document.getElementById("Completed").clientHeight;
-
-            if(heightNotComp > heightComp){
-                document.getElementById("Completed").style.minHeight = heightNotComp +'px';
-                document.getElementById("notCompleted").style.minHeight = heightNotComp +'px';
-            }
-            else{
-                document.getElementById("notCompleted").style.minHeight = heightComp +'px';
-                document.getElementById("Completed").style.minHeight = heightComp +'px';
-            }
-        }, 200);
-
     }
 
     // add todos
@@ -172,14 +151,12 @@ todoApp.controller('todoListController', function ($scope,$rootScope,$location,$
         ev.preventDefault();
     }
     $scope.drag = function (ev,el,status) {
-        el.style.border="2px #ac2925 solid";
         ev.dataTransfer.setData("text", ev.target.id);
         $scope.draggedELmentStatus = status;
     }
     $scope.drop = function (ev,el) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
-        document.getElementById(data).style.border="0px";
         el.appendChild(document.getElementById(data));
 
 
